@@ -2,6 +2,6 @@ FROM node:alpine
 RUN mkdir -p /src
 WORKDIR /src
 COPY package*.json ./
-RUN npm ci
+RUN npm i
 COPY . .
 CMD ["npm", "start"]
