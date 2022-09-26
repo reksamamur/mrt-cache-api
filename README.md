@@ -2,7 +2,7 @@
 
 ## Introductions
 A Cleanup and cached API for MRT Jakarta API.
-> *Please be kind I'm using free tier [Railway](https://railway.app/) for hosting this API*
+> *Please be kind I'm using free tier [Railway](https://railway.app/) to hosting this API*
 
 ## What can you do?
 | Endpoint | README |
