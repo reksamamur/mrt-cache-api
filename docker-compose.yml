@@ -1,0 +1,30 @@
+version: "3"
+services:
+  mrtnode:
+    container_name: mrt_server_node
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/src
+      - /src/node_modules
+    env_file:
+      - ./.env
+    depends_on:
+      - mrtredis
+    # networks:
+    #   - redis
+  mrtredis:
+    container_name: mrt_server_redis
+    image: redis:alpine
+    ports:
+      - "6380:6379"
+    # networks:
+    #   - redis
+# networks:
+#   redis:
+#     driver: bridge
+## mrt.local
+##
