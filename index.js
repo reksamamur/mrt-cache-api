@@ -100,8 +100,9 @@ const fetchAll = async () => {
 const getAllData = async (req, res) => {
   try {
     const data = await fetchAll();
+    console.log("⚡️[server]: Fetching data");
     await client.set("mrtbase", JSON.stringify(serveData(data)));
-
+    console.log("⚡️[server]: Data Fetched");
     return res.json(serveData(data));
   } catch (error) {
     throw error;
