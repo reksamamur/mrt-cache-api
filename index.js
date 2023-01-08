@@ -2,6 +2,7 @@ import axios from "axios";
 import { createClient } from "redis";
 import express from "express";
 import dotenv from "dotenv";
+import MRTContent from "./mrt_content.js";
 
 dotenv.config();
 
@@ -53,7 +54,7 @@ const diferTimeLoc = (weekdays, weekends) => {
 };
 
 const serveData = (praseDataMRTs) => {
-  const newDataMRTs = praseDataMRTs.map((obj) => {
+  const newDataMRTs = praseDataMRTs.map((obj, index) => {
     const schedules = [
       {
         location: "hi",
@@ -64,10 +65,13 @@ const serveData = (praseDataMRTs) => {
         times: diferTimeLoc(obj.jadwal_lb_biasa, obj.jadwal_lb_libur),
       },
     ];
+
+    const findContent = MRTContent.find(item => item.nid == obj.nid);
+
     const complete = {
       nid: obj.nid,
       title: obj.title,
-      urutan: parseInt(obj.urutan),
+      urutan: index++,
       isbig: parseInt(obj.isbig),
       path: `${process.env.URL_MAIN}${obj.path}`,
       catatan: obj.catatan,
@@ -77,6 +81,8 @@ const serveData = (praseDataMRTs) => {
       estimasi: obj.estimasi,
       retails: obj.retails,
       fasilitas: obj.fasilitas,
+      image: findContent.image,
+      descriptions: findContent.descriptions
     };
     return complete;
   });
